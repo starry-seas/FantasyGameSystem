@@ -1,0 +1,14 @@
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\bin\Debug\net10.0\FantasyRPG.exe
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\bin\Debug\net10.0\FantasyRPG.deps.json
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\bin\Debug\net10.0\FantasyRPG.runtimeconfig.json
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\bin\Debug\net10.0\FantasyRPG.dll
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\bin\Debug\net10.0\FantasyRPG.pdb
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\FantasyRPG.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\FantasyRPG.AssemblyInfoInputs.cache
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\FantasyRPG.AssemblyInfo.cs
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\FantasyRPG.csproj.CoreCompileInputs.cache
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\FantasyRPG.dll
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\refint\FantasyRPG.dll
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\FantasyRPG.pdb
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\FantasyRPG.genruntimeconfig.cache
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\ref\FantasyRPG.dll
