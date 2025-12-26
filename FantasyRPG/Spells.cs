@@ -1,3 +1,5 @@
+namespace FantasyRPG;
+
 public class Spells
 {
     public string Spell {get; set;}
@@ -6,8 +8,9 @@ public class Spells
     public bool CauseDamage {get; set;}
     public int DamageValue {get; set;}
     public int EnergyRequired {get; set;}
+    public bool BaseSpell {get; set;}
 
-    public Spells(string spellName, string spellElementData, int spellLevelData, bool doesDamage)
+    public Spells(string spellName, string spellElementData, int spellLevelData, bool doesDamage, bool isBaseSpell)
     {
         Spell = spellName;
         SpellElement = spellElementData;
@@ -15,6 +18,7 @@ public class Spells
         CauseDamage = doesDamage;
         DamageValue = 0;
         EnergyRequired = 0;
+        BaseSpell = isBaseSpell;
     }
 
     public void AssignDamageValue()
@@ -34,4 +38,11 @@ public class Spells
     {
         EnergyRequired += SpellLevel*3;
     }
+
+    public override string ToString()
+    {   
+        return $"Spell:{Spell}\n Element: {SpellElement}, Level {SpellLevel}, Damage: {DamageValue}, Energy Used: {EnergyRequired}\n";
+    }
+
+    
 }

@@ -101,3 +101,4 @@ C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPGTests\obj\Debu
 C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPGTests\obj\Debug\net10.0\FantasyRPGTests.pdb
 C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPGTests\obj\Debug\net10.0\FantasyRPGTests.genruntimeconfig.cache
 C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPGTests\obj\Debug\net10.0\ref\FantasyRPGTests.dll
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPGTests\obj\Debug\net10.0\FantasyRPGTests.sourcelink.json

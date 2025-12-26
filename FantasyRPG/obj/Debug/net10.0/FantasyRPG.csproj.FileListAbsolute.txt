@@ -12,3 +12,4 @@ C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net
 C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\FantasyRPG.pdb
 C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\FantasyRPG.genruntimeconfig.cache
 C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\ref\FantasyRPG.dll
+C:\Users\Afifa\Desktop\Bootcamp\Week7\FantasyGameSystem\FantasyRPG\obj\Debug\net10.0\FantasyRPG.sourcelink.json

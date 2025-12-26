@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Reflection.Metadata;
+using FantasyRPG;
 
 namespace FantasyRPGTests;
 
@@ -8,7 +9,7 @@ public class SpellTest
     [Fact]
     public void Constructor_ShouldInitialiseAllProperties()
     {
-      Spells heal = new Spells("Recover Health", "Spirit", 1, false);
+      Spells heal = new Spells("Recover Health", "Spirit", 1, false, true);
 
       Assert.Equal("Recover Health", heal.Spell);
       Assert.Equal("Spirit", heal.SpellElement);
@@ -21,17 +22,17 @@ public class SpellTest
     [Fact]
     public void AssignDamageValue_CheckIsCorrect()
     {
-        Spells fireBlast = new Spells("Fire Blast", "Fire", 1, true);
+        Spells fireBlast = new Spells("Fire Blast", "Fire", 1, true, true);
 
         fireBlast.AssignDamageValue();
 
-        Assert.Equal(4, fireBlast.DamageValue);
+        Assert.Equal(5, fireBlast.DamageValue);
     }
 
     [Fact]
     public void AssignEnergyRequired_CheckIfCorrect()
     {
-        Spells waterBlast = new Spells("Water Blast", "Water", 2, true);
+        Spells waterBlast = new Spells("Water Blast", "Water", 2, true, true);
 
         waterBlast.AssignEnergyRequired();
 

@@ -1,5 +1,4 @@
-using System.Net.Http.Headers;
-using System.Reflection;
+using FantasyRPG;
 
 public class PlayerTests
 {
@@ -29,12 +28,25 @@ public class PlayerTests
     [Fact]
     public void CreateGrimoire_AddBaseSpellsDependingOnElement()
     {
+        SpellLibrary.InitialisePlayerSpells();
         Player harry = new Player("Harry", "Water");
 
         harry.CreateBaseGrimoire();
-        Assert.Equal(5, harry.Grimoire.Count);
-        Assert.Equal("Torrent Shot", harry.Grimoire[3].Spell);
-        Assert.Equal(5, harry.Grimoire[3].DamageValue);
-        Assert.Equal(3, harry.Grimoire[3].EnergyRequired);
+        Assert.Equal(3, harry.Grimoire.Count);
+        Assert.Equal("Torrent Shot", harry.Grimoire[1].Spell);
+        Assert.Equal(5, harry.Grimoire[1].DamageValue);
+        Assert.Equal(3, harry.Grimoire[1].EnergyRequired);
+    }
+
+    [Fact]
+    public void PlayerInformation_ShouldDisplayAllInfo()
+    {   
+        SpellLibrary.InitialisePlayerSpells();
+        Player rosie = new Player("Rosie", "Fire");
+        rosie.AddBaseStats();
+        rosie.CreateBaseGrimoire();
+        rosie.PlayerInformation();
+
+        Assert.Equal("\nName: Rosie\nElement: Fire\nHealth = 100 Energy = 100", rosie.PlayerInformation());
     }
 }
