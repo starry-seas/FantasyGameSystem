@@ -7,6 +7,7 @@ class Program
     static void Main(string[] args)
     {   
         GameArt.WizardHat();
+        PressToStart();
         ConfigureSpellsAndEnemies();
         Player player = ConfigurePlayer();
         Enemies randomEnemy = GamePlay.GenerateRandomEnemy();
@@ -42,17 +43,11 @@ class Program
         SpellLibrary.InitialiseEnemySpells();
         EnemyLibrary.CreateAllEnemies();
     }
-}
 
-        // if (chooseSpell == "Recover Health")
-        // {
-        //     if (player.PlayerStats[0] < 100)
-        //     {
-        //         player.PlayerStats[0] += 10;
-        //         player.PlayerStats[1] -= player.Grimoire[0].EnergyRequired;
-        //     }
-            
-        //     else if (player.PlayerStats[0] == 100)
-        //     {
-        //         Console.WriteLine("Health at maximum already, cannot use spell");
-        //     }
+    static void PressToStart()
+    {
+        Console.WriteLine("Press any key to start the game");
+        Console.ReadKey(true);
+       
+    }
+}
