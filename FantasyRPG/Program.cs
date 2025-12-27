@@ -6,11 +6,23 @@ class Program
 {
     static void Main(string[] args)
     {   
+        GameArt.WizardHat();
         ConfigureSpellsAndEnemies();
         Player player = ConfigurePlayer();
+        Enemies randomEnemy = GamePlay.GenerateRandomEnemy();
 
         Console.WriteLine($"Welcome {player.Name} of the {player.Element} coven. Here is your information: " + player.PlayerInformation());
 
+        while(player.PlayerStats[0] > 0 && randomEnemy.Health > 0)
+        {
+            GamePlay.PlayerCastSpell(player, randomEnemy);
+            GamePlay.EnemyTurn(randomEnemy, player);
+
+            if(player.PlayerStats[0] == 0 || randomEnemy.Health == 0)
+            {
+                break;
+            }
+        }
     }
 
     static Player ConfigurePlayer()

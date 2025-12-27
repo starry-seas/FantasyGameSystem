@@ -39,6 +39,4 @@ public class Enemies
             EnemyGrimoire = SpellLibrary.AllEnemySpells.Where(s => s.SpellElement == Element && s.SpellLevel <3).Take(3).ToList();
         }
     }
-
-
 }
