@@ -9,6 +9,7 @@ public class Player
     public double Energy {get; set;}
     public string PlayerBio {get; set;}
     public double XP {get; set;}
+    public int Level {get; set;}
 
     public Player(string playerName, string playerElement)
     {   
@@ -48,5 +49,13 @@ public class Player
             $"\nHealth = {Health} Energy = {Energy}";
         
         return PlayerBio;
+    }
+
+    public void UpdatePlayerLevel(Player player)
+    {
+        while (player.Level < 6)
+        {
+            
+        }
     }
 }

@@ -6,10 +6,11 @@ using Microsoft.VisualBasic;
 
 public static class GamePlay
 {
+    private static readonly Random Random = new Random();
+
     public static Enemies GenerateRandomEnemy()
     {
-        Random randomEnemy = new Random();
-        int randomIndex = randomEnemy.Next(EnemyLibrary.AllEnemies.Count);
+        int randomIndex = Random.Next(EnemyLibrary.AllEnemies.Count);
         var generatedEnemy = EnemyLibrary.AllEnemies[randomIndex];
 
         return generatedEnemy;
@@ -58,13 +59,12 @@ public static class GamePlay
     
     public static void EnemyTurn(Player player, Enemies enemy)
     {   
-        Random randomEnemySpell = new Random();
-        int randomEnemyIndex = randomEnemySpell.Next(enemy.EnemyGrimoire.Count);
+        int randomEnemyIndex = Random.Next(enemy.EnemyGrimoire.Count);
         var enemySpell = enemy.EnemyGrimoire[randomEnemyIndex];
         double enemyAttack = enemySpell.BaseDamage * GetElementMultiplier(enemySpell.SpellElement, player.Element);
         double enemyEnergy = enemySpell.EnergyRequired;
 
-        enemy.Energy -= enemyEnergy;
+        enemy.Energy -= enemySpell.EnergyRequired;
         enemy.Health += enemySpell.RestoreAmount;
         player.Health -= enemyAttack;
 
