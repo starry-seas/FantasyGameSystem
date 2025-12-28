@@ -6,43 +6,73 @@ public class Spells
     public string SpellElement {get; set;}
     public int SpellLevel {get; set;}
     public bool CauseDamage {get; set;}
-    public int DamageValue {get; set;}
-    public int EnergyRequired {get; set;}
+    public double BaseDamage {get; set;}
+    public double EnergyRequired {get; set;}
     public bool BaseSpell {get; set;}
+    public bool DoesRestore {get; set;}
+    public double RestoreAmount {get; set;}
+    public double GainXP {get; set;}
+    public string Description {get; set;}
 
-    public Spells(string spellName, string spellElementData, int spellLevelData, bool doesDamage, bool isBaseSpell)
+    public Spells(string spellName, string spellElementData, int spellLevelData, bool doesDamage, bool isBaseSpell, bool doesSpellRestore, string spellDescription)
     {
         Spell = spellName;
         SpellElement = spellElementData;
         SpellLevel = spellLevelData;
         CauseDamage = doesDamage;
-        DamageValue = 0;
-        EnergyRequired = 0;
+        BaseDamage = AssignBaseDamage();
+        EnergyRequired = AssignEnergyRequired();
         BaseSpell = isBaseSpell;
+        DoesRestore = doesSpellRestore;
+        RestoreAmount = AssignRestoreValues();
+        GainXP = AssignXPGainedFromUse();
+        Description = spellDescription;
+
     }
 
-    public void AssignDamageValue()
+    private double AssignBaseDamage()
     {
         if (CauseDamage == true)
         {
-            DamageValue += SpellLevel*5;
-            
+            BaseDamage += SpellLevel*5;
         }
         else
         {
-            DamageValue = 0;
+            BaseDamage = 0;
         }
+
+        return BaseDamage;
     }
 
-    public void AssignEnergyRequired()
+    private double AssignEnergyRequired()
     {
         EnergyRequired += SpellLevel*3;
+
+        return EnergyRequired;
+    }
+
+    private double AssignRestoreValues()
+    {
+        if (DoesRestore == true)
+        {
+            RestoreAmount += SpellLevel*5;
+        }
+        else
+        {
+            RestoreAmount = 0;
+        }
+
+        return RestoreAmount;
+    }
+
+    private double AssignXPGainedFromUse()
+    {
+        GainXP = EnergyRequired*2.5/SpellLevel;
+        return GainXP;
     }
 
     public override string ToString()
     {   
-        return $"Spell:{Spell}\n Element: {SpellElement}, Level {SpellLevel}, Damage: {DamageValue}, Energy Used: {EnergyRequired}\n";
+        return $"Spell:{Spell}\n Element: {SpellElement}, Level {SpellLevel}, Damage: {BaseDamage}, Energy Use: {EnergyRequired}\n";
     }
-
-    
 }

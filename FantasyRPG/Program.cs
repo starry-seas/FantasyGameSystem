@@ -1,12 +1,11 @@
 ﻿using System.Runtime.InteropServices;
 
 namespace FantasyRPG;
-
 class Program
 {
     static void Main(string[] args)
     {   
-        GameArt.WizardHat();
+        // GameArt.WizardHat();
         PressToStart();
         ConfigureSpellsAndEnemies();
         Player player = ConfigurePlayer();
@@ -14,13 +13,21 @@ class Program
 
         Console.WriteLine($"Welcome {player.Name} of the {player.Element} coven. Here is your information: " + player.PlayerInformation());
 
-        while(player.PlayerStats[0] > 0 && randomEnemy.Health > 0)
+        while(player.Health > 0 && randomEnemy.Health > 0)
         {
             GamePlay.PlayerCastSpell(player, randomEnemy);
-            GamePlay.EnemyTurn(randomEnemy, player);
+            GamePlay.EnemyTurn(player, randomEnemy);
 
-            if(player.PlayerStats[0] == 0 || randomEnemy.Health == 0)
+            if (player.Health == 0)
             {
+                player.XP += randomEnemy.DefeatXP/2.5;
+                Console.WriteLine($"{player.Name} loses!");
+                break;
+            }
+            else if (randomEnemy.Health == 0)
+            {
+                player.XP += randomEnemy.DefeatXP;
+                Console.WriteLine($"{randomEnemy.Name} defeated!");
                 break;
             }
         }
@@ -29,7 +36,6 @@ class Program
     static Player ConfigurePlayer()
     {
         Player user = new Player ("", "");
-        user.AddBaseStats();
         user.AskPlayerName();
         user.SelectElement();
         user.CreateBaseGrimoire();
@@ -48,6 +54,5 @@ class Program
     {
         Console.WriteLine("Press any key to start the game");
         Console.ReadKey(true);
-       
     }
 }
