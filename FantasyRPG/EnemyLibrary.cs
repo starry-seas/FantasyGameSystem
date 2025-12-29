@@ -2,7 +2,9 @@ using FantasyRPG;
 
 public static class EnemyLibrary
 {
-    public static List<Enemies>AllEnemies = new List<Enemies>();
+    public static List<Enemies> AllEnemies = new List<Enemies>();
+    public static List<Enemies> BossEnemies = new List<Enemies>();
+    public static List<Enemies> BaseEnemies = new List<Enemies>();
 
     public static void CreateAllEnemies()
     {
@@ -40,10 +42,23 @@ public static class EnemyLibrary
         AllEnemies.Add(new Enemies("Haunt", "Spirit", false, 3));
         AllEnemies.Add(new Enemies("Soul Reaver", "Spirit", false, 4));
         AllEnemies.Add(new Enemies("Spectral Lord", "Spirit", true, 5));
+    }
 
+    public static void CreateEnemyGrimoireAndStats()
+    {
         foreach (Enemies enemy in AllEnemies)
         {
             enemy.CreateEnemyGrimoire();
+
+            if (enemy.Boss)
+            {
+                enemy.BossStats();
+                BossEnemies.Add(enemy);
+            }
+            else
+            {
+                BaseEnemies.Add(enemy);
+            }
         }
     }
 }

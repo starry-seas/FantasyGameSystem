@@ -38,5 +38,17 @@ public class Enemies
         {
             EnemyGrimoire = SpellLibrary.AllEnemySpells.Where(s => s.SpellElement == Element && s.SpellLevel <3).Take(3).ToList();
         }
+
+        foreach (Spells spell in EnemyGrimoire)
+        {   
+            if (Level >= 2 && spell.SpellLevel >= 2)
+            spell.SpellLevel += Level;
+        }
+    }
+
+    public void BossStats()
+    {
+        Health += 50;
+        Energy += 50;
     }
 }

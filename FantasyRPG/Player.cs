@@ -1,3 +1,5 @@
+using System.Dynamic;
+
 namespace FantasyRPG;
 
 public class Player
@@ -9,8 +11,8 @@ public class Player
     public double Energy {get; set;}
     public string PlayerBio {get; set;}
     public double XP {get; set;}
-    public int Level {get; set;}
-
+    public int Level => PlayerLevel(XP);
+    
     public Player(string playerName, string playerElement)
     {   
         Name = playerName;
@@ -45,17 +47,19 @@ public class Player
     {
         PlayerBio =
             $"\nName: {Name}"+
-            $"\nElement: {Element}"+
-            $"\nHealth = {Health} Energy = {Energy}";
+            $"Element: {Element}"+
+            $"Health = {Health} Energy = {Energy}";
         
         return PlayerBio;
     }
 
-    public void UpdatePlayerLevel(Player player)
+    public int PlayerLevel(double xp) => xp switch
     {
-        while (player.Level < 6)
-        {
-            
-        }
-    }
+        <= 100 => 1,
+        <= 225 => 2,
+        <= 375 => 3,
+        <= 550 => 4,
+        > 550 => 5,
+        _ => 0
+    };
 }

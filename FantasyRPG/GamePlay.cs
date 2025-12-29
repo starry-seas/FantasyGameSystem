@@ -1,4 +1,5 @@
 using System.CodeDom.Compiler;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks.Dataflow;
 using FantasyRPG;
@@ -9,21 +10,21 @@ public static class GamePlay
     private static readonly Random Random = new Random();
 
     public static Enemies GenerateRandomEnemy()
-    {
-        int randomIndex = Random.Next(EnemyLibrary.AllEnemies.Count);
-        var generatedEnemy = EnemyLibrary.AllEnemies[randomIndex];
+    {    
+        int randomIndex = Random.Next(EnemyLibrary.BaseEnemies.Count);
+        var enemy = EnemyLibrary.AllEnemies[randomIndex];
 
-        return generatedEnemy;
+        Console.WriteLine($"Enemy: {enemy.Name}, Health = {enemy.Health}, Element = {enemy.Element}");
+
+        return enemy;
     }
     
-    private static int PlayerSelectSpell(Player player, Enemies randEnemy)
+    private static int PlayerSelectSpell(Player player)
     {   
-        Console.WriteLine($"Enemy: {randEnemy.Name}, Health = {randEnemy.Health}, Element = {randEnemy.Element}");
-
         Console.WriteLine($"{player.Name}'s turn. Select a spell from your Grimoire. To select, enter the spell key:");
         foreach ((int index, Spells Item) in player.Grimoire.Index())
         {
-            Console.WriteLine($"Key:{index}, Spell: {string.Join("", Item)}");
+            Console.WriteLine($"Key: {index}, Spell: {string.Join("", Item)}");
         }
 
         int playerChoice = int.Parse(Console.ReadLine()!);
@@ -33,22 +34,25 @@ public static class GamePlay
 
     public static void PlayerCastSpell(Player player, Enemies enemy)
     {   
-        var spellChosen = player.Grimoire[PlayerSelectSpell(player, enemy)];
+        var spellChosen = player.Grimoire[PlayerSelectSpell(player)];
         double damage = spellChosen.BaseDamage * GetElementMultiplier(spellChosen.SpellElement, enemy.Element);
         double energy = spellChosen.EnergyRequired;
         string spell = spellChosen.Spell;
         double spellXP = spellChosen.GainXP;
+        double maxPlayerHP = player.Health;
 
         player.Energy -= energy;
-        player.Health += spellChosen.RestoreAmount;
+
+        player.Health = Math.Min(player.Health + spellChosen.RestoreAmount, maxPlayerHP);
+
         player.XP += spellXP;
 
-        enemy.Health -= damage;
+        enemy.Health = Math.Max(enemy.Health - damage, 0);
 
         Console.WriteLine($"{player.Name} casts {spell}");
         if (spellChosen.CauseDamage)
         {
-            Console.WriteLine($"{enemy.Name} takes {damage}!\n{enemy.Name} health = {enemy.Health}");
+            Console.WriteLine($"{enemy.Name} takes {damage} damage!\n{enemy.Name} health = {enemy.Health}");
             Console.WriteLine($"{player.Name} health = {player.Health}, energy = {player.Energy}");
         }
         else
@@ -62,11 +66,13 @@ public static class GamePlay
         int randomEnemyIndex = Random.Next(enemy.EnemyGrimoire.Count);
         var enemySpell = enemy.EnemyGrimoire[randomEnemyIndex];
         double enemyAttack = enemySpell.BaseDamage * GetElementMultiplier(enemySpell.SpellElement, player.Element);
-        double enemyEnergy = enemySpell.EnergyRequired;
+        double maxEnemyHP = enemy.Health;
 
         enemy.Energy -= enemySpell.EnergyRequired;
-        enemy.Health += enemySpell.RestoreAmount;
-        player.Health -= enemyAttack;
+
+        enemy.Health = Math.Min(enemy.Health + enemySpell.RestoreAmount, maxEnemyHP);
+
+        player.Health = Math.Max(player.Health - enemyAttack, 0);
 
         Console.WriteLine($"{enemy.Name} casts {enemySpell.Spell}! {player.Name} takes {enemyAttack} damage!");
         Console.WriteLine($"{player.Name} health = {player.Health}, energy = {player.Energy}");

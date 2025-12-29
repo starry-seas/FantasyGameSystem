@@ -1,36 +1,29 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics.Tracing;
+using System.Runtime.InteropServices;
 
 namespace FantasyRPG;
 class Program
 {
     static void Main(string[] args)
     {   
-        // GameArt.WizardHat();
         PressToStart();
         ConfigureSpellsAndEnemies();
         Player player = ConfigurePlayer();
-        Enemies randomEnemy = GamePlay.GenerateRandomEnemy();
+        Console.WriteLine($"Welcome {player.Name} of the {player.Element} coven. Here is your information: {player.PlayerInformation()}, Level: {player.Level}");
 
-        Console.WriteLine($"Welcome {player.Name} of the {player.Element} coven. Here is your information: " + player.PlayerInformation());
+        Enemies enemy = GamePlay.GenerateRandomEnemy();
 
-        while(player.Health > 0 && randomEnemy.Health > 0)
+        string battleWinner = Battle(player, enemy);
+        if (battleWinner == player.Name)
         {
-            GamePlay.PlayerCastSpell(player, randomEnemy);
-            GamePlay.EnemyTurn(player, randomEnemy);
-
-            if (player.Health == 0)
-            {
-                player.XP += randomEnemy.DefeatXP/2.5;
-                Console.WriteLine($"{player.Name} loses!");
-                break;
-            }
-            else if (randomEnemy.Health == 0)
-            {
-                player.XP += randomEnemy.DefeatXP;
-                Console.WriteLine($"{randomEnemy.Name} defeated!");
-                break;
-            }
+            Console.WriteLine($"Congratulations {player.Name}. You have won this battle. Press any key to go to next battle");
         }
+        else
+        {
+            Console.WriteLine($"You have been defeated by {enemy.Name} Press any key to go to next battle");
+        }
+
+        Console.WriteLine($"XP = {player.XP} Level = {player.Level}");
     }
 
     static Player ConfigurePlayer()
@@ -54,5 +47,35 @@ class Program
     {
         Console.WriteLine("Press any key to start the game");
         Console.ReadKey(true);
+    }
+
+    static string Battle(Player player, Enemies enemy)
+    {
+        string winner;
+
+        while(player.Health > 0 && enemy.Health > 0)
+        {
+            GamePlay.PlayerCastSpell(player, enemy);
+            GamePlay.EnemyTurn(player, enemy);
+
+            if (player.Health == 0)
+            {
+                player.XP += enemy.DefeatXP/2.5;
+                player.Energy = Math.Min(player.Energy + 30, 100);
+                Console.WriteLine($"{player.Name} loses!");
+                winner = enemy.Name;
+                return winner;
+            }
+            else if (enemy.Health == 0)
+            {
+                player.XP += enemy.DefeatXP;
+                player.Energy = 100;
+                Console.WriteLine($"{enemy.Name} defeated!");
+                winner = player.Name;
+                return winner;
+            }
+        }
+
+        return "Error, no winner found";
     }
 }
