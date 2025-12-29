@@ -12,13 +12,22 @@ public static class GamePlay
     public static Enemies GenerateRandomEnemy()
     {    
         int randomIndex = Random.Next(EnemyLibrary.BaseEnemies.Count);
-        var enemy = EnemyLibrary.AllEnemies[randomIndex];
+        var enemy = EnemyLibrary.BaseEnemies[randomIndex];
 
         Console.WriteLine($"Enemy: {enemy.Name}, Health = {enemy.Health}, Element = {enemy.Element}");
 
         return enemy;
     }
     
+    public static Enemies GenerateBoss()
+    {
+        int bossIndex = Random.Next(EnemyLibrary.BossEnemies.Count);
+        var boss = EnemyLibrary.BossEnemies[bossIndex];
+
+        Console.WriteLine($"Enemy: {boss.Name}, Health = {boss.Health}, Element = {boss.Element}");
+
+        return boss;
+    }
     private static int PlayerSelectSpell(Player player)
     {   
         Console.WriteLine($"{player.Name}'s turn. Select a spell from your Grimoire. To select, enter the spell key:");
