@@ -25,7 +25,7 @@ public class Enemies
     }
 
     public void CreateEnemyGrimoire()
-    {
+    { 
         if (Boss)
         {
             EnemyGrimoire = SpellLibrary.AllEnemySpells.Where(s => s.SpellElement == Element).Take(5).ToList();
@@ -37,12 +37,6 @@ public class Enemies
         else
         {
             EnemyGrimoire = SpellLibrary.AllEnemySpells.Where(s => s.SpellElement == Element && s.SpellLevel <3).Take(3).ToList();
-        }
-
-        foreach (Spells spell in EnemyGrimoire)
-        {   
-            if (Level >= 2 && spell.SpellLevel >= 2)
-            spell.SpellLevel += Level;
         }
     }
 

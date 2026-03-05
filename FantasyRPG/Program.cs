@@ -9,21 +9,23 @@ class Program
         PressToStart();
         ConfigureSpellsAndEnemies();
         Player player = ConfigurePlayer();
+        
         Console.WriteLine($"Welcome {player.Name} of the {player.Element} coven. Here is your information: {player.PlayerInformation()}, Level: {player.Level}");
 
-        Enemies enemy = GamePlay.GenerateRandomEnemy();
+        Enemies enemy = BattleSystem.GenerateRandomEnemy();
 
         string battleWinner = Battle(player, enemy);
+
         if (battleWinner == player.Name)
         {
-            Console.WriteLine($"Congratulations {player.Name}. You have won this battle. Press any key to go to next battle");
+            Console.WriteLine($"Congratulations {player.Name}.");
         }
         else
         {
-            Console.WriteLine($"You have been defeated by {enemy.Name} Press any key to go to next battle");
+            Console.WriteLine($"You have been defeated by {enemy.Name}.");
         }
 
-        Console.WriteLine($"XP = {player.XP} Level = {player.Level}");
+        Console.WriteLine($"XP = {player.XP} Energy {player.Energy} Level = {player.Level}");
     }
 
     static Player ConfigurePlayer()
@@ -55,8 +57,8 @@ class Program
 
         while(player.Health > 0 && enemy.Health > 0)
         {
-            GamePlay.PlayerCastSpell(player, enemy);
-            GamePlay.EnemyTurn(player, enemy);
+            BattleSystem.PlayerCastSpell(player, enemy);
+            BattleSystem.EnemyTurn(player, enemy);
 
             if (player.Health == 0)
             {
@@ -77,5 +79,10 @@ class Program
         }
 
         return "Error, no winner found";
+    }
+
+    static void PostBattleOptions(Player player)
+    {
+        PlayerUpgrades.LearnNewSpell(player);
     }
 }

@@ -1,11 +1,12 @@
 using System.CodeDom.Compiler;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks.Dataflow;
 using FantasyRPG;
 using Microsoft.VisualBasic;
 
-public static class GamePlay
+public static class BattleSystem
 {
     private static readonly Random Random = new Random();
 
@@ -75,13 +76,14 @@ public static class GamePlay
         int randomEnemyIndex = Random.Next(enemy.EnemyGrimoire.Count);
         var enemySpell = enemy.EnemyGrimoire[randomEnemyIndex];
         double enemyAttack = enemySpell.BaseDamage * GetElementMultiplier(enemySpell.SpellElement, player.Element);
+        double finalDamage = enemyAttack * (enemy.Boss ? 1.3 : 1);
         double maxEnemyHP = enemy.Health;
 
         enemy.Energy -= enemySpell.EnergyRequired;
 
         enemy.Health = Math.Min(enemy.Health + enemySpell.RestoreAmount, maxEnemyHP);
 
-        player.Health = Math.Max(player.Health - enemyAttack, 0);
+        player.Health = Math.Max(player.Health - finalDamage, 0);
 
         Console.WriteLine($"{enemy.Name} casts {enemySpell.Spell}! {player.Name} takes {enemyAttack} damage!");
         Console.WriteLine($"{player.Name} health = {player.Health}, energy = {player.Energy}");
